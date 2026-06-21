@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yasseralsamman/saudi-municipal-coding/schemas/city.schema.json",
+  "title": "City",
+  "description": "One city of Saudi Arabia, linked to its region.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["city_id", "region_id", "name_ar", "name_en"],
+  "properties": {
+    "city_id": { "type": "integer", "minimum": 1 },
+    "region_id": { "type": "integer", "minimum": 1, "maximum": 13 },
+    "name_ar": { "type": "string", "minLength": 1 },
+    "name_en": { "type": "string", "minLength": 1 }
+  }
+}

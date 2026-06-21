@@ -1,0 +1,45 @@
+name: Data fix
+description: Report a name typo or a missing/incorrect record.
+title: "[data]: "
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for corrections to the dataset itself. Accurate fixes need a verifiable
+        source, so please include one below.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of fix
+      options:
+        - Name typo (Arabic or English)
+        - Missing district or city
+        - Wrong relationship (region/city/district mismatch)
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: identifier
+    attributes:
+      label: district_id / city_id / region_id
+      description: The id of the affected record.
+      placeholder: "e.g. 2510 or 17743"
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+      description: What is wrong now, and what should it be instead?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source / justification
+      description: >
+        A citation we can verify — a government publication, an official map, etc.
+        Fixes without a source cannot be merged.
+    validations:
+      required: true

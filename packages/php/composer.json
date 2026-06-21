@@ -1,0 +1,33 @@
+{
+  "name": "yasseralsamman/saudi-municipal-coding",
+  "description": "Open dataset of Saudi Arabia's regions, cities, and districts from the MOMRAH Unified Municipal Coding — bilingual lookups with stable IDs.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "saudi",
+    "saudi-arabia",
+    "regions",
+    "cities",
+    "districts",
+    "municipal",
+    "momrah",
+    "lookup"
+  ],
+  "require": {
+    "php": "^8.1",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10"
+  },
+  "autoload": {
+    "psr-4": {
+      "SaudiMunicipalCoding\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SaudiMunicipalCoding\\Tests\\": "tests/"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yasseralsamman/saudi-municipal-coding/schemas/region.schema.json",
+  "title": "Region",
+  "description": "One administrative region of Saudi Arabia.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["region_id", "name_ar", "name_en"],
+  "properties": {
+    "region_id": { "type": "integer", "minimum": 1, "maximum": 13 },
+    "name_ar": { "type": "string", "minLength": 1 },
+    "name_en": { "type": "string", "minLength": 1 }
+  }
+}

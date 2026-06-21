@@ -1,0 +1,33 @@
+{
+  "name": "saudi-municipal-coding-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Open dataset of Saudi Arabia's regions, cities, and districts from the MOMRAH Unified Municipal Coding — bilingual lookups with stable IDs.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yasseralsamman/saudi-municipal-coding.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "validate": "tsx scripts/validate.ts",
+    "stats": "tsx scripts/stats.ts",
+    "test": "pnpm -r test",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check:dist-clean": "git diff --exit-code -- data/dist packages/*/data"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^20.14.0",
+    "better-sqlite3": "^11.3.0",
+    "csv-stringify": "^6.5.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

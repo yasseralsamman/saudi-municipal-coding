@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions: { contents: write, id-token: write }
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with: { node-version: 20, cache: pnpm, registry-url: 'https://registry.npmjs.org' }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run validate
+      - run: pnpm run build
+      - run: pnpm --filter saudi-municipal-coding run build
+      - name: Build SQLite + collect release assets
+        run: |
+          pnpm tsx scripts/lib/sqlite.ts
+          mkdir release-assets
+          cp data/dist/*.{json,csv,sql} release-assets/
+          cp data/dist/saudi-municipal-coding.sqlite release-assets/
+          (cd release-assets && zip -r ../saudi-municipal-coding-${{ github.ref_name }}.zip .)
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            saudi-municipal-coding-${{ github.ref_name }}.zip
+            data/dist/saudi-municipal-coding.sqlite
+          generate_release_notes: true
+      - name: Publish to npm
+        run: |
+          VERSION=$(node -p "require('./packages/js/package.json').version")
+          if npm view "saudi-municipal-coding@${VERSION}" version >/dev/null 2>&1; then
+            echo "saudi-municipal-coding@${VERSION} is already published to npm; skipping."
+          else
+            pnpm --filter saudi-municipal-coding publish --access public --no-git-checks
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

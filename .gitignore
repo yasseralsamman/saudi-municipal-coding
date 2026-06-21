@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+packages/php/vendor/
+
+# PHP library: lockfile is not committed; PHPUnit cache is local
+packages/php/composer.lock
+packages/php/.phpunit.cache/
+
+# Build output of the npm package (NOT data/dist/, which is committed)
+packages/*/dist/
+
+# SQLite is a release asset only, never committed (incl. WAL/SHM sidecars)
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# CI / release staging
+release-assets/
+
+# Local-only working documents and raw inputs — never published
+/DATA_FIXES.md
+/PLAN.md
+*.xlsx
+
+# OS / editor noise
+.DS_Store
+*.log
+
+.claude/
